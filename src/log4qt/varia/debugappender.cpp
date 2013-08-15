@@ -90,7 +90,7 @@ namespace Log4Qt
   #else
         OutputDebugStringW(reinterpret_cast<const WCHAR*>(message.utf16()));
   #endif
-#elif
+#else
         fprintf(stderr, message.toLocal8Bit().data());
         fflush(stderr);
 #endif

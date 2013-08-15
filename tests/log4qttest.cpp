@@ -1342,7 +1342,11 @@ void Log4QtTest::DailyRollingFileAppender()
     resetLogging();
 
     if (mSkipLongTests)
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+        QSKIP("Skipping long running test");
+#else
         QSKIP("Skipping long running test", SkipSingle);
+#endif
     qDebug() << "The test is time based and takes approximately 3 minutes ...";
 
     QString dir(mTemporaryDirectory.path() + "/DailyRollingFileAppender");

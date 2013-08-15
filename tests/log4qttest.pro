@@ -23,7 +23,13 @@
 # *******************************************************************************
 
 TEMPLATE = app
-CONFIG += qtestlib
+
+isEqual(QT_MAJOR_VERSION, 5) {
+    QT += testlib
+} else { # if not Qt5
+    CONFIG += qtestlib
+}
+
 DEFINES -= \
     QT_NO_CAST_FROM_ASCII \
 	QT_NO_CAST_TO_ASCII
