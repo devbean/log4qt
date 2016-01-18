@@ -34,6 +34,10 @@
 #include <QtCore/QMutex>
 #include <QtCore/QStringList>
 
+QT_BEGIN_NAMESPACE
+class QMetaProperty;
+class QObject;
+QT_END_NAMESPACE
 
 /******************************************************************************
  * Declarations
@@ -95,9 +99,7 @@ namespace Log4Qt
 		
 	private:
 	    Factory();
-	    Factory(const Factory &rOther); // Not implemented
-	    // virtual ~Factory(); // Use compiler default
-	    Factory &operator=(const Factory &rOther); // Not implemented
+        Q_DISABLE_COPY(Factory)
 	
 	public:
 		/*!
@@ -354,86 +356,132 @@ namespace Log4Qt
 	 **************************************************************************/
 
     inline Appender *Factory::createAppender(const QString &rAppenderClassName)
-    {   return instance()->doCreateAppender(rAppenderClassName);    }
+    {
+        return instance()->doCreateAppender(rAppenderClassName);
+    }
     
 	inline Appender *Factory::createAppender(const char *pAppenderClassName)
-	{	return instance()->doCreateAppender(QLatin1String(pAppenderClassName));	}
+    {
+        return instance()->doCreateAppender(QLatin1String(pAppenderClassName));
+    }
 
     inline Filter *Factory::createFilter(const QString &rFilterClassName)
-    {   return instance()->doCreateFilter(rFilterClassName);    }
+    {
+        return instance()->doCreateFilter(rFilterClassName);
+    }
 
     inline Filter *Factory::createFilter(const char *pFilterClassName)
-    {	return instance()->doCreateFilter(QLatin1String(pFilterClassName));	}
+    {
+        return instance()->doCreateFilter(QLatin1String(pFilterClassName));
+    }
     
     inline Layout *Factory::createLayout(const QString &rLayoutClassName)
-    {   return instance()->doCreateLayout(rLayoutClassName);   }
+    {
+        return instance()->doCreateLayout(rLayoutClassName);
+    }
     
     inline Layout *Factory::createLayout(const char *pLayoutClassName)
-    {	return instance()->doCreateLayout(QLatin1String(pLayoutClassName));	}
+    {
+        return instance()->doCreateLayout(QLatin1String(pLayoutClassName));
+    }
    
     inline void Factory::registerAppender(const QString &rAppenderClassName,
                                           AppenderFactoryFunc pAppenderFactoryFunc)
-    {   instance()->doRegisterAppender(rAppenderClassName, pAppenderFactoryFunc);  }
+    {
+        instance()->doRegisterAppender(rAppenderClassName, pAppenderFactoryFunc);
+    }
 
     inline void Factory::registerAppender(const char *pAppenderClassName,
                                           AppenderFactoryFunc pAppenderFactoryFunc)
-    {	instance()->doRegisterAppender(QLatin1String(pAppenderClassName), pAppenderFactoryFunc);	}
+    {
+        instance()->doRegisterAppender(QLatin1String(pAppenderClassName), pAppenderFactoryFunc);
+    }
     
     inline void Factory::registerFilter(const QString &rFilterClassName,
                                  FilterFactoryFunc pFilterFactoryFunc)
-    {   instance()->doRegisterFilter(rFilterClassName, pFilterFactoryFunc);   }
+    {
+        instance()->doRegisterFilter(rFilterClassName, pFilterFactoryFunc);
+    }
     
     inline void Factory::registerFilter(const char *pFilterClassName,
     		                            FilterFactoryFunc pFilterFactoryFunc)
-    {	instance()->doRegisterFilter(QLatin1String(pFilterClassName), pFilterFactoryFunc);	}
+    {
+        instance()->doRegisterFilter(QLatin1String(pFilterClassName), pFilterFactoryFunc);
+    }
     
     inline void Factory::registerLayout(const QString &rLayoutClassName,
                                  LayoutFactoryFunc pLayoutFactoryFunc)
-    {   instance()->doRegisterLayout(rLayoutClassName, pLayoutFactoryFunc);    }
+    {
+        instance()->doRegisterLayout(rLayoutClassName, pLayoutFactoryFunc);
+    }
     
     inline void Factory::registerLayout(const char *pLayoutClassName,
     		                            LayoutFactoryFunc pLayoutFactoryFunc)
-    {	instance()->doRegisterLayout(QLatin1String(pLayoutClassName), pLayoutFactoryFunc);	}
+    {
+        instance()->doRegisterLayout(QLatin1String(pLayoutClassName), pLayoutFactoryFunc);
+    }
 
     inline QStringList Factory::registeredAppenders()
-    {	QMutexLocker locker(&instance()->mObjectGuard);
-    	return instance()->mAppenderRegistry.keys();	}
+    {
+        QMutexLocker locker(&instance()->mObjectGuard);
+        return instance()->mAppenderRegistry.keys();
+    }
     
     inline QStringList Factory::registeredFilters()
-    {	QMutexLocker locker(&instance()->mObjectGuard);
-    	return instance()->mFilterRegistry.keys();	}
+    {
+        QMutexLocker locker(&instance()->mObjectGuard);
+        return instance()->mFilterRegistry.keys();
+    }
     
     inline QStringList Factory::registeredLayouts()
-    {   QMutexLocker locker(&instance()->mObjectGuard);
-        return instance()->mLayoutRegistry.keys();  }
+    {
+        QMutexLocker locker(&instance()->mObjectGuard);
+        return instance()->mLayoutRegistry.keys();
+    }
     
     inline void Factory::setObjectProperty(QObject *pObject, 
                                            const QString &rProperty, 
                                            const QString &rValue)
-    {   instance()->doSetObjectProperty(pObject, rProperty, rValue); }
+    {
+        instance()->doSetObjectProperty(pObject, rProperty, rValue);
+    }
     
     inline void Factory::setObjectProperty(QObject *pObject, 
                                            const char *pProperty, 
                                            const QString &rValue)
-    {   instance()->doSetObjectProperty(pObject, QLatin1String(pProperty), rValue);  }
+    {
+        instance()->doSetObjectProperty(pObject, QLatin1String(pProperty), rValue);
+    }
     
     inline void Factory::unregisterAppender(const QString &rAppenderClassName)
-    {   instance()->doUnregisterAppender(rAppenderClassName);  }
+    {
+        instance()->doUnregisterAppender(rAppenderClassName);
+    }
     
     inline void Factory::unregisterAppender(const char *pAppenderClassName)
-    {	instance()->doUnregisterAppender(QLatin1String(pAppenderClassName));	}
+    {
+        instance()->doUnregisterAppender(QLatin1String(pAppenderClassName));
+    }
     
     inline void Factory::unregisterFilter(const QString &rFilterClassName)
-    {   instance()->doUnregisterFilter(rFilterClassName);  }
+    {
+        instance()->doUnregisterFilter(rFilterClassName);
+    }
     
     inline void Factory::unregisterFilter(const char *pFilterClassName)
-    {	instance()->doUnregisterFilter(QLatin1String(pFilterClassName));	}
+    {
+        instance()->doUnregisterFilter(QLatin1String(pFilterClassName));
+    }
     
     inline void Factory::unregisterLayout(const QString &rLayoutClassName)
-    {   instance()->doUnregisterLayout(rLayoutClassName);  }
+    {
+        instance()->doUnregisterLayout(rLayoutClassName);
+    }
     
     inline void Factory::unregisterLayout(const char *pLayoutClassName)
-    {	instance()->doUnregisterLayout(QLatin1String(pLayoutClassName));	}
+    {
+        instance()->doUnregisterLayout(QLatin1String(pLayoutClassName));
+    }
     
 } // namespace Log4Qt   
 

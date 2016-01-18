@@ -41,6 +41,9 @@
 #include <QtCore/QMutex>
 #include <QtCore/QProcess>
 #include <QtCore/QSettings>
+#ifndef QT_NO_DATASTREAM
+#include <QtCore/QDataStream>
+#endif
 #include "log4qt/helpers/datetime.h"
 #include "log4qt/helpers/logerror.h"
 #include "log4qt/loggingevent.h"
