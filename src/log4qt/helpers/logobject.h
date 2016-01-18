@@ -40,6 +40,7 @@
 
 #include <QtCore/QObject>
 
+#include "log4qt/log4qtshared.h"
 #include "log4qt/helpers/classlogger.h"
 #if QT_VERSION >= QT_VERSION_CHECK(4, 4, 0)
 #	include <QtCore/QAtomicInt>
@@ -76,7 +77,7 @@ namespace Log4Qt
 	 * \sa \ref Ownership "Object ownership",
 	 *     LOG4QT_DECLARE_QCLASS_LOGGER
 	 */
-	class LogObject : public QObject
+    class LogObject : public QObject
 	{
 		Q_OBJECT
 
@@ -92,8 +93,7 @@ namespace Log4Qt
 	    virtual ~LogObject();
 
 	private:
-	    LogObject(const LogObject &rOther); // Not implemented
-	    LogObject &operator=(const LogObject &rOther); // Not implemented
+        Q_DISABLE_COPY(LogObject)
 
 	public:
 		/*!
@@ -183,30 +183,40 @@ namespace Log4Qt
 	{}
 
 	inline int LogObject::referenceCount() const
+    {
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-    {	return mReferenceCount;	}
+        return mReferenceCount;
 #else
-    {	return mReferenceCount.loadAcquire();	}
+        return mReferenceCount.loadAcquire();
 #endif
+    }
 
 	inline void LogObject::release()
+    {
 #if QT_VERSION < QT_VERSION_CHECK(4, 4, 0)
-	{	if ((q_atomic_decrement(&mReferenceCount) == 0) && !parent())
-				delete(this);	}
+        if ((q_atomic_decrement(&mReferenceCount) == 0) && !parent()) {
+            delete(this);
+        }
 #else
-	{	if (!mReferenceCount.deref())
-			delete(this);	}
+        if (!mReferenceCount.deref()) {
+            delete(this);
+        }
 #endif
+    }
 
 	inline void LogObject::retain()
+    {
 #if QT_VERSION < QT_VERSION_CHECK(4, 4, 0)
-	{	q_atomic_increment(&mReferenceCount);	}
+        q_atomic_increment(&mReferenceCount);
 #else
-	{	mReferenceCount.ref();	}
+        mReferenceCount.ref();
 #endif
+    }
 
     inline Logger *LogObject::logger() const
-    {   return mLog4QtClassLogger.logger(this);    }
+    {
+        return mLog4QtClassLogger.logger(this);
+    }
 
 } // namespace Log4Qt
 

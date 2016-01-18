@@ -91,7 +91,7 @@ Log4QtTest::Log4QtTest() :
 QObject(),
 mSkipLongTests(false),
 mTemporaryDirectory(),
-mpLoggingEvents(0),
+mpLoggingEvents(nullptr),
 mDefaultProperties(),
 mProperties(&mDefaultProperties)
 {

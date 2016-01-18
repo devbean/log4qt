@@ -105,10 +105,10 @@ namespace Log4Qt
 	    mAppendRecursionGuard(false),
 	    mIsActive(true),
 	    mIsClosed(false),
-	    mpLayout(0),
+        mpLayout(nullptr),
 	    mThreshold(Level::NULL_INT),
-		mpHeadFilter(0),
-		mpTailFilter(0)
+        mpHeadFilter(nullptr),
+        mpTailFilter(nullptr)
 	{
 	}
 	
@@ -120,10 +120,10 @@ namespace Log4Qt
 	    mAppendRecursionGuard(false),
 	    mIsActive(isActive),
 	    mIsClosed(false),
-	    mpLayout(0),
+        mpLayout(nullptr),
 	    mThreshold(Level::NULL_INT),
-	    mpHeadFilter(0),
-	    mpTailFilter(0)
+        mpHeadFilter(nullptr),
+        mpTailFilter(nullptr)
 	{
 	}
 	

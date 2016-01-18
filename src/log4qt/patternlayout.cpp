@@ -61,7 +61,7 @@ namespace  Log4Qt
 	PatternLayout::PatternLayout(QObject *pParent) :
 	    Layout(pParent),
 	    mPattern(),
-	    mpPatternFormatter(0)
+        mpPatternFormatter(nullptr)
 	{
 		setConversionPattern(DEFAULT_CONVERSION_PATTERN);
 	}
@@ -71,7 +71,7 @@ namespace  Log4Qt
 	                             QObject *pParent) :
 	    Layout(pParent),
 	    mPattern(),
-	    mpPatternFormatter(0)
+        mpPatternFormatter(nullptr)
 	{
 		setConversionPattern(rPattern);
 	}
@@ -81,7 +81,7 @@ namespace  Log4Qt
 	                             QObject *pParent) :
 	    Layout(pParent),
 	    mPattern(),
-	    mpPatternFormatter(0)
+        mpPatternFormatter(nullptr)
 	{
 		setConversionPattern(conversionPattern);
 	}

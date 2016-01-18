@@ -68,8 +68,8 @@ namespace Log4Qt
 	    mAppendFile(false),
 	    mBufferedIo(true),
 	    mFileName(),
-	    mpFile(0),
-	    mpTextStream(0)
+        mpFile(nullptr),
+        mpTextStream(nullptr)
 	{
 	}
 	
@@ -81,8 +81,8 @@ namespace Log4Qt
 	    mAppendFile(false),
 	    mBufferedIo(true),
 	    mFileName(rFileName),
-	    mpFile(0),
-	    mpTextStream(0)
+        mpFile(nullptr),
+        mpTextStream(nullptr)
 	{
 	}
 	
@@ -95,8 +95,8 @@ namespace Log4Qt
 	    mAppendFile(append),
 	    mBufferedIo(true),
 	    mFileName(rFileName),
-	    mpFile(0),
-	    mpTextStream(0)
+        mpFile(nullptr),
+        mpTextStream(nullptr)
 	{
 	}
 	
@@ -110,8 +110,8 @@ namespace Log4Qt
 	    mAppendFile(append),
 	    mBufferedIo(buffered),
 	    mFileName(rFileName),
-	    mpFile(0),
-	    mpTextStream(0)
+        mpFile(nullptr),
+        mpTextStream(nullptr)
 	{
 	}
 	
@@ -176,7 +176,7 @@ namespace Log4Qt
 	    if (mpFile)
 	        logger()->debug("Closing file '%1' for appender '%2'", mpFile->fileName(), name());
 	    
-	    setWriter(0);
+        setWriter(nullptr);
 	    delete mpTextStream;
 	    mpTextStream = 0;
 	    delete mpFile;

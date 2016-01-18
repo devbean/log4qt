@@ -71,7 +71,7 @@ namespace Log4Qt
 	
 	LoggingEvent::LoggingEvent() :
 		mLevel(Level::NULL_INT),
-	    mpLogger(0),
+        mpLogger(nullptr),
 	    mMessage(),
 	    mNdc(NDC::peek()),
 	    mProperties(MDC::context()),

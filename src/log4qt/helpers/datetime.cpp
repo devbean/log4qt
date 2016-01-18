@@ -161,7 +161,7 @@ namespace Log4Qt
 	    
 	    const QChar c = rToken.at(0);
 	    QString result;
-	    int used;
+        int used = 0;
 	    
 	    // Qt data format strings 
 	    if (rToken.startsWith(QLatin1String("dddd")))

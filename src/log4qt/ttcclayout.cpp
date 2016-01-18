@@ -67,7 +67,7 @@ namespace Log4Qt
 		mContextPrinting(true),
 	    mDateFormat(),
 	    mThreadPrinting(true),
-	    mpPatternFormatter(0)
+        mpPatternFormatter(nullptr)
 	{
         setDateFormat(TIME_RELATIVE);
 	}
@@ -80,7 +80,7 @@ namespace Log4Qt
 		mContextPrinting(true),
 	    mDateFormat(rDateFormat),
 	    mThreadPrinting(true),
-	    mpPatternFormatter(0)
+        mpPatternFormatter(nullptr)
 	{
 	}
 	
@@ -92,7 +92,7 @@ namespace Log4Qt
 		mContextPrinting(true),
 	    mDateFormat(),
 	    mThreadPrinting(true),
-	    mpPatternFormatter(0)
+        mpPatternFormatter(nullptr)
 	{
 	    setDateFormat(dateFormat);
 	}

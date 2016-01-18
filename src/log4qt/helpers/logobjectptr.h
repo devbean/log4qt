@@ -122,7 +122,7 @@ namespace Log4Qt
 
 	template <class T>
 	inline LogObjectPtr<T>::LogObjectPtr() :
-		mpLogObject(0)
+        mpLogObject(nullptr)
 	{}
 
 	template <class T>

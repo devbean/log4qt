@@ -101,7 +101,7 @@ namespace Log4Qt
 	
 	inline Filter::Filter(QObject *pObject) :
 	    LogObject(pObject),
-	    mpNext(0)
+        mpNext(nullptr)
 	{}
 	
 	inline Filter::~Filter()

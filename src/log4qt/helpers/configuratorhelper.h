@@ -75,10 +75,9 @@ namespace Log4Qt
 		typedef bool (*ConfigureFunc)(const QString &rFileName);
 		
 	private:
-	    ConfiguratorHelper();
-	    ConfiguratorHelper(const ConfiguratorHelper &rOther); // Not implemented
-	    virtual ~ConfiguratorHelper();
-	    ConfiguratorHelper &operator=(const ConfiguratorHelper &rOther); // Not implemented
+        ConfiguratorHelper();
+        virtual ~ConfiguratorHelper();
+        Q_DISABLE_COPY(ConfiguratorHelper)
 	
 	public:
 
@@ -186,20 +185,28 @@ namespace Log4Qt
 	 **************************************************************************/
 	
 	inline QList<LoggingEvent> ConfiguratorHelper::configureError()
-	{   QMutexLocker locker(&instance()->mObjectGuard);
-		return instance()->mConfigureError;	}
+    {
+        QMutexLocker locker(&instance()->mObjectGuard);
+        return instance()->mConfigureError;
+    }
 
 	inline QString ConfiguratorHelper::configurationFile()
-	{   QMutexLocker locker(&instance()->mObjectGuard);
-		return instance()->mConfigurationFile;	}
+    {
+        QMutexLocker locker(&instance()->mObjectGuard);
+        return instance()->mConfigurationFile;
+    }
 
 	inline void ConfiguratorHelper::setConfigureError(const QList<LoggingEvent> &rConfigureError)
-	{   QMutexLocker locker(&instance()->mObjectGuard);
-		instance()->mConfigureError = rConfigureError;	}
+    {
+        QMutexLocker locker(&instance()->mObjectGuard);
+        instance()->mConfigureError = rConfigureError;
+    }
 
-	inline void ConfiguratorHelper::setConfigurationFile(const QString &rFileName,
-                                                       ConfigureFunc pConfigureFunc)
-	{   instance()->doSetConfigurationFile(rFileName, pConfigureFunc);	}
+    inline void ConfiguratorHelper::setConfigurationFile(const QString &rFileName,
+                                                         ConfigureFunc pConfigureFunc)
+    {
+        instance()->doSetConfigurationFile(rFileName, pConfigureFunc);
+    }
 	
 } // namespace Log4Qt
 

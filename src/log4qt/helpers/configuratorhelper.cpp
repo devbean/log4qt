@@ -61,8 +61,8 @@ namespace Log4Qt
 	ConfiguratorHelper::ConfiguratorHelper() :
 		mObjectGuard(),
 	    mConfigurationFile(),
-	    mpConfigureFunc(0),
-	    mpConfigurationFileWatch(0),
+        mpConfigureFunc(nullptr),
+        mpConfigurationFileWatch(nullptr),
 		mConfigureError()
 	{
 	}
@@ -78,9 +78,7 @@ namespace Log4Qt
 
     
     void ConfiguratorHelper::doConfigurationFileChanged(const QString &rFileName)
-	{	
-	    QMutexLocker locker(&mObjectGuard);
-
+    {
 	    if (!mpConfigureFunc)
 			return;
 	    mpConfigureFunc(rFileName);
@@ -104,10 +102,13 @@ namespace Log4Qt
 		mConfigurationFile = rFileName;
     	mpConfigureFunc = pConfigureFunc;
     	mpConfigurationFileWatch = new QFileSystemWatcher();
-    	mpConfigurationFileWatch->addPath(rFileName);
-    	connect(mpConfigurationFileWatch, 
-    			SIGNAL(fileChanged(const QString &)), 
-    			SLOT(configurationFileChanged(const QString &)));
+        if (mpConfigurationFileWatch->addPath(rFileName)) {
+            connect(mpConfigurationFileWatch,
+                    SIGNAL(fileChanged(const QString &)),
+                    SLOT(doConfigurationFileChanged(const QString &)));
+        } else {
+            qWarning() << "Add Path '" << rFileName << "' to file system watcher failed!";
+        }
     }
     
     

@@ -22,8 +22,9 @@
 # 
 # *******************************************************************************
 
-INCLUDEPATH += $$PWD/..
-DEPENDPATH += $$PWD/..
+INCLUDEPATH = $$PWD/..
+DEPENDPATH = $$PWD/..
+
 HEADERS += \
     $$PWD/appender.h \
     $$PWD/appenderskeleton.h \
@@ -65,7 +66,8 @@ HEADERS += \
     $$PWD/varia/levelmatchfilter.h \
     $$PWD/varia/levelrangefilter.h \
     $$PWD/varia/listappender.h \
-    $$PWD/varia/stringmatchfilter.h
+    $$PWD/varia/stringmatchfilter.h \
+    $$PWD/log4qtshared.h
     
 SOURCES += \
     $$PWD/appenderskeleton.cpp \
@@ -108,4 +110,3 @@ SOURCES += \
     $$PWD/varia/levelrangefilter.cpp \
     $$PWD/varia/listappender.cpp \
     $$PWD/varia/stringmatchfilter.cpp
-    

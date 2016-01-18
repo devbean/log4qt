@@ -84,7 +84,7 @@ namespace Log4Qt
 	    mObjectGuard(QMutex::Recursive), // Recursive for doStartup() to call doConfigureLogLogger()
 	    mpLoggerRepository(new Hierarchy()),
 	    mHandleQtMessages(false),
-	    mOldQtMsgHandler(0)
+        mOldQtMsgHandler(nullptr)
 	{
 	}
 	
@@ -285,7 +285,7 @@ namespace Log4Qt
 	        s.beginGroup(log4qt_group);
 	        if (s.childGroups().contains(properties_group))
 	        {
-	            const QString group(QLatin1String("Log4Qt/Properties"));
+	            const QString group(QLatin1String("Properties"));
 	            static_logger()->debug("Default initialisation configures from setting '%1/%2'", log4qt_group, properties_group);
 	            s.beginGroup(properties_group);
 	            PropertyConfigurator::configure(s);

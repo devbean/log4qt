@@ -191,16 +191,25 @@ namespace Log4Qt
 	{}
 	
 	inline DateTime &DateTime::operator=(const DateTime &rOther)
-	{   QDateTime::operator=(rOther); return *this; }
+    {
+        QDateTime::operator=(rOther);
+        return *this;
+    }
 	
 	inline qint64 DateTime::toMilliSeconds() const
-	{   return (qint64)1000 * toTime_t() + time().msec();   }
+    {
+        return static_cast<qint64>(1000) * toTime_t() + time().msec();
+    }
 	
 	inline DateTime DateTime::currentDateTime()
-	{   return DateTime(QDateTime::currentDateTime());    }
+    {
+        return DateTime(QDateTime::currentDateTime());
+    }
 	
 	inline DateTime DateTime::fromMilliSeconds(qint64 milliSeconds)
-	{   return DateTime(QDateTime::fromTime_t(milliSeconds / 1000).addMSecs(milliSeconds % 1000));    }
+    {
+        return DateTime(QDateTime::fromTime_t(milliSeconds / 1000).addMSecs(milliSeconds % 1000));
+    }
 	
 	
 } // namespace Log4Qt

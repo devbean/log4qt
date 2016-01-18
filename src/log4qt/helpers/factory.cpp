@@ -28,7 +28,6 @@
  * Dependencies
  ******************************************************************************/
 
-
 #include "log4qt/helpers/factory.h"
 
 #include <QtCore/QDebug>
@@ -52,8 +51,6 @@
 #include "log4qt/varia/nullappender.h"
 #include "log4qt/varia/stringmatchfilter.h"
 
-
-
 namespace Log4Qt
 {
 	
@@ -75,52 +72,80 @@ namespace Log4Qt
     // Appenders
 
 	Appender *console_file_appender()
-	{	return new ConsoleAppender;	}
+    {
+        return new ConsoleAppender;
+    }
 
 	Appender *create_daily_rolling_file_appender()
-	{	return new DailyRollingFileAppender;	}
+    {
+        return new DailyRollingFileAppender;
+    }
 
 	Appender *create_debug_appender()
-	{	return new DebugAppender;	}
+    {
+        return new DebugAppender;
+    }
 
 	Appender *create_file_appender()
-	{	return new FileAppender;	}
+    {
+        return new FileAppender;
+    }
 
 	Appender *create_list_appender()
-	{	return new ListAppender;	}
+    {
+        return new ListAppender;
+    }
 
 	Appender *create_null_appender()
-	{	return new NullAppender;	}
+    {
+        return new NullAppender;
+    }
 
 	Appender *create_rolling_file_appender()
-	{	return new RollingFileAppender;	}
+    {
+        return new RollingFileAppender;
+    }
 	
 	
 	// Filters
 	
 	Filter *create_deny_all_filter()
-	{	return new DenyAllFilter;	}
+    {
+        return new DenyAllFilter;
+    }
 
 	Filter *create_level_match_filter()
-	{	return new LevelMatchFilter;	}
+    {
+        return new LevelMatchFilter;
+    }
 
 	Filter *create_level_range_filter()
-	{	return new LevelRangeFilter;	}
+    {
+        return new LevelRangeFilter;
+    }
 
 	Filter *create_string_match_filter()
-	{	return new StringMatchFilter;	}
+    {
+        return new StringMatchFilter;
+    }
 
 	
 	// Layouts
 	
 	Layout *create_pattern_layout()
-	{	return new PatternLayout;	}
+    {
+        return new PatternLayout;
+    }
 
 	Layout *create_simple_layout()
-	{	return new SimpleLayout;	}
+    {
+        return new SimpleLayout;
+    }
 
 	Layout *create_ttcc_layout()
-	{	return new TTCCLayout;	}
+    {
+        return new TTCCLayout;
+    }
 
     
 	
@@ -151,7 +176,7 @@ namespace Log4Qt
     	if (!mAppenderRegistry.contains(rAppenderClassName))
 	    {
 	        logger()->warn("Request for the creation of Appender with class '%1', which is not registered", rAppenderClassName);
-	    	return 0;
+            return nullptr;
 	    }
 	    return mAppenderRegistry.value(rAppenderClassName)();
 	}
@@ -164,7 +189,7 @@ namespace Log4Qt
     	if (!mFilterRegistry.contains(rFilterClassName))
 	    {
 	        logger()->warn("Request for the creation of Filter with class '%1', which is not registered", rFilterClassName);
-	    	return 0;
+            return nullptr;
 	    }
 	    return mFilterRegistry.value(rFilterClassName)();
     }
@@ -177,7 +202,7 @@ namespace Log4Qt
     	if (!mLayoutRegistry.contains(rLayoutClassName))
 	    {
 	        logger()->warn("Request for the creation of Layout with class '%1', which is not registered", rLayoutClassName);
-	    	return 0;
+            return nullptr;
 	    }
 	    return mLayoutRegistry.value(rLayoutClassName)();
     }

@@ -264,10 +264,10 @@ namespace Log4Qt
 	class InitialisationHelper
 	{
 	private:
-	    InitialisationHelper();
-	    InitialisationHelper(const InitialisationHelper &rOther); // Not implemented
-	    virtual ~InitialisationHelper();
-	    InitialisationHelper &operator=(const InitialisationHelper &rOther); // Not implemented
+        InitialisationHelper();
+        virtual ~InitialisationHelper();
+        Q_DISABLE_COPY(InitialisationHelper)
+
 
 	public:
 
@@ -414,17 +414,23 @@ namespace Log4Qt
 	 **************************************************************************/
 
     inline QHash<QString, QString> InitialisationHelper::environmentSettings()
-    {   // QMutexLocker locker(&instance()->mObjectGuard); // Constant for object lifetime
-        return instance()->mEnvironmentSettings;  }
+    {
+        // QMutexLocker locker(&instance()->mObjectGuard); // Constant for object lifetime
+        return instance()->mEnvironmentSettings;
+    }
 
 	inline QString InitialisationHelper::setting(const QString &rKey,
 	                                             const QString &rDefault)
-    {   // QMutexLocker locker(&instance()->mObjectGuard); // Reentrant and const
-        return instance()->doSetting(rKey, rDefault);  }
+    {
+        // QMutexLocker locker(&instance()->mObjectGuard); // Reentrant and const
+        return instance()->doSetting(rKey, rDefault);
+    }
 
 	inline qint64 InitialisationHelper::startTime()
-	{   // QMutexLocker locker(&instance()->mObjectGuard); // Constant for object lifetime
-		return instance()->mStartTime;  }
+    {
+        // QMutexLocker locker(&instance()->mObjectGuard); // Constant for object lifetime
+        return instance()->mStartTime;
+    }
 
 } // namespace Log4Qt
 

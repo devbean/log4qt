@@ -63,7 +63,7 @@ namespace Log4Qt
 	ConsoleAppender::ConsoleAppender(QObject *pParent) :
 	    WriterAppender(pParent),
 	    mTarget(STDOUT_TARGET),
-	    mpTextStream(0)
+        mpTextStream(nullptr)
 	{
 	}
 	
@@ -72,7 +72,7 @@ namespace Log4Qt
 	                                 QObject *pParent) :
 	    WriterAppender(pLayout, pParent),
 	    mTarget(STDOUT_TARGET),
-	    mpTextStream(0)
+        mpTextStream(nullptr)
 	{
 	}
 	
@@ -82,7 +82,7 @@ namespace Log4Qt
                                      QObject *pParent) :
         WriterAppender(pLayout, pParent),
         mTarget(STDOUT_TARGET),
-        mpTextStream(0)
+        mpTextStream(nullptr)
     {
         setTarget(rTarget);
     }
@@ -93,7 +93,7 @@ namespace Log4Qt
 	                                 QObject *pParent) :
 	    WriterAppender(pLayout, pParent),
 	    mTarget(target),
-	    mpTextStream(0)
+        mpTextStream(nullptr)
 	{
 	}
 	
@@ -156,7 +156,7 @@ namespace Log4Qt
 	{
 	    // Q_ASSERT_X(, "ConsoleAppender::closeStream()", "Lock must be held by caller")
 	
-	    setWriter(0);
+        setWriter(nullptr);
 	    delete mpTextStream;
 	    mpTextStream = 0;
 	}
