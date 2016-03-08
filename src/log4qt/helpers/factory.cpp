@@ -253,6 +253,8 @@ namespace Log4Qt
             value = OptionConverter::toBoolean(rValue, &ok);
         else if (type == QLatin1String("int"))
             value = OptionConverter::toInt(rValue, &ok);
+        else if (type == QLatin1String("qint64") || type == QLatin1String("qlonglong"))
+            value = OptionConverter::toQInt64(rValue, &ok);
         else if (type == QLatin1String("Log4Qt::Level"))
             value = QVariant::fromValue(OptionConverter::toLevel(rValue, &ok));
         else if (type == QLatin1String("QString"))
