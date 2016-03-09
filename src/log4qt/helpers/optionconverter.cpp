@@ -232,6 +232,20 @@ namespace Log4Qt
         return 0;
     }
     
+    qint64 OptionConverter::toQInt64(const QString &rOption, 
+      bool *p_ok)
+    {
+      int value = rOption.trimmed().toLongLong(p_ok);
+      if (*p_ok)
+        return value;
+
+      LogError e = LOG4QT_ERROR(QT_TR_NOOP("Invalid option string '%1' for an qint64"), 
+        CONFIGURATOR_INVALID_OPTION_ERROR,
+        "Log4Qt::OptionConverter");
+      e << rOption;
+      logger()->error(e);
+      return 0;
+    }
     
     Level OptionConverter::toLevel(const QString &rOption, 
                                    bool *p_ok)

@@ -95,6 +95,15 @@ namespace Log4Qt
                          bool *p_ok = 0);
         
         /*!
+          * Converts the option \a rOption to a qint64 value using 
+          * QString::toLongLong(). If the conversion is successful, the qint64 is 
+          * returned and \a p_ok is set to true. Otherwise an error is written
+          * to the log, \a p_ok is set to false and 0 is returned.
+          */
+        static qint64 toQInt64(const QString &rOption,
+                               bool *p_ok = 0);
+
+        /*!
          * Converts the option \a rOption to a level value using 
          * Level::fromString(). If the conversion is successful, the level 
          * is returned and \a p_ok is set to true. Otherwise an error is 
